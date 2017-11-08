@@ -7,6 +7,7 @@ use Yii;
 /**
  * This is the model class for table "authors".
  *
+ * @property integer $id
  * @property string $viaf
  * @property string $name
  *
@@ -28,9 +29,10 @@ class Authors extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['viaf', 'name'], 'required'],
-            [['viaf'], 'number', 'max' => 22],
-            [['name'], 'string', 'max' => 200],
+            [['name'], 'required'],
+            [['viaf'], 'number'],
+            [['name'], 'string', 'max' => 150],
+            [['viaf'], 'unique'],
         ];
     }
 
@@ -40,6 +42,7 @@ class Authors extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
+            'id' => 'ID',
             'viaf' => 'VIAF',
             'name' => 'Name',
         ];
@@ -50,6 +53,6 @@ class Authors extends \yii\db\ActiveRecord
      */
     public function getBooks()
     {
-        return $this->hasMany(Books::className(), ['author' => 'viaf']);
+        return $this->hasMany(Books::className(), ['author' => 'id']);
     }
 }

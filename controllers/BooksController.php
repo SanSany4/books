@@ -46,7 +46,7 @@ class BooksController extends Controller
 
     /**
      * Displays a single Books model.
-     * @param string $id
+     * @param integer $id
      * @return mixed
      */
     public function actionView($id)
@@ -66,7 +66,9 @@ class BooksController extends Controller
         $model = new Books();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->isbn]);
+
+
+            return $this->redirect(['view', 'id' => $model->id]);
         } else {
             return $this->render('create', [
                 'model' => $model,
@@ -77,7 +79,7 @@ class BooksController extends Controller
     /**
      * Updates an existing Books model.
      * If update is successful, the browser will be redirected to the 'view' page.
-     * @param string $id
+     * @param integer $id
      * @return mixed
      */
     public function actionUpdate($id)
@@ -85,7 +87,7 @@ class BooksController extends Controller
         $model = $this->findModel($id);
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->isbn]);
+            return $this->redirect(['view', 'id' => $model->id]);
         } else {
             return $this->render('update', [
                 'model' => $model,
@@ -96,7 +98,7 @@ class BooksController extends Controller
     /**
      * Deletes an existing Books model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
-     * @param string $id
+     * @param integer $id
      * @return mixed
      */
     public function actionDelete($id)
@@ -109,7 +111,7 @@ class BooksController extends Controller
     /**
      * Finds the Books model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
-     * @param string $id
+     * @param integer $id
      * @return Books the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */

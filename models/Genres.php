@@ -29,7 +29,7 @@ class Genres extends \yii\db\ActiveRecord
     {
         return [
             [['name'], 'required'],
-            [['name'], 'string', 'max' => 200],
+            [['name'], 'string', 'max' => 150],
             [['name'], 'unique'],
         ];
     }
@@ -50,6 +50,6 @@ class Genres extends \yii\db\ActiveRecord
      */
     public function getBookGenres()
     {
-        return $this->hasMany(BookGenres::className(), ['genre' => 'id']);
+        return $this->hasMany(BookGenres::className(), ['genre_fk' => 'id']);
     }
 }

@@ -7,12 +7,13 @@ use Yii;
 /**
  * This is the model class for table "books".
  *
+ * @property integer $id
+ * @property integer $author_id
+ * @property string $title
  * @property string $isbn
- * @property string $author
- * @property string $name
  *
  * @property BookGenres[] $bookGenres
- * @property Authors $author0
+ * @property Authors $authorId
  */
 class Books extends \yii\db\ActiveRecord
 {
@@ -30,11 +31,12 @@ class Books extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['isbn', 'name'], 'required'],
+            [['author_id'], 'integer'],
+            [['title'], 'required'],
+            [['title'], 'string', 'max' => 150],
             [['isbn'], 'number', 'max' => 9999999999999],
-            [['author'], 'number'],
-            [['name'], 'string', 'max' => 200],
-            [['author'], 'exist', 'skipOnError' => true, 'targetClass' => Authors::className(), 'targetAttribute' => ['author' => 'viaf']],
+            [['isbn'], 'unique'],
+            [['author_id'], 'exist', 'skipOnError' => true, 'targetClass' => Authors::className(), 'targetAttribute' => ['author' => 'id']],
         ];
     }
 
@@ -44,9 +46,10 @@ class Books extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
+            'id' => 'ID',
+            'author_id' => 'Author',
+            'title' => 'Title',
             'isbn' => 'ISBN',
-            'author' => 'Author',
-            'name' => 'Name',
         ];
     }
 
@@ -55,14 +58,14 @@ class Books extends \yii\db\ActiveRecord
      */
     public function getBookGenres()
     {
-        return $this->hasMany(BookGenres::className(), ['book' => 'isbn']);
+        return $this->hasMany(BookGenres::className(), ['book_fk' => 'id']);
     }
 
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getAuthor0()
+    public function getAuthorId()
     {
-        return $this->hasOne(Authors::className(), ['viaf' => 'author']);
+        return $this->hasOne(Authors::className(), ['id' => 'author_id']);
     }
 }

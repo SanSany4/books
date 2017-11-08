@@ -46,7 +46,7 @@ class AuthorsController extends Controller
 
     /**
      * Displays a single Authors model.
-     * @param string $id
+     * @param integer $id
      * @return mixed
      */
     public function actionView($id)
@@ -66,7 +66,7 @@ class AuthorsController extends Controller
         $model = new Authors();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->viaf]);
+            return $this->redirect(['view', 'id' => $model->id]);
         } else {
             return $this->render('create', [
                 'model' => $model,
@@ -77,7 +77,7 @@ class AuthorsController extends Controller
     /**
      * Updates an existing Authors model.
      * If update is successful, the browser will be redirected to the 'view' page.
-     * @param string $id
+     * @param integer $id
      * @return mixed
      */
     public function actionUpdate($id)
@@ -85,7 +85,7 @@ class AuthorsController extends Controller
         $model = $this->findModel($id);
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->viaf]);
+            return $this->redirect(['view', 'id' => $model->id]);
         } else {
             return $this->render('update', [
                 'model' => $model,
@@ -96,7 +96,7 @@ class AuthorsController extends Controller
     /**
      * Deletes an existing Authors model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
-     * @param string $id
+     * @param integer $id
      * @return mixed
      */
     public function actionDelete($id)
@@ -109,7 +109,7 @@ class AuthorsController extends Controller
     /**
      * Finds the Authors model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
-     * @param string $id
+     * @param integer $id
      * @return Authors the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */

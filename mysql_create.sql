@@ -1,32 +1,32 @@
 CREATE TABLE `authors` (
-	`viaf` VARCHAR(22) NOT NULL,
-	`name` VARCHAR(200) NOT NULL,
-	PRIMARY KEY (`viaf`)
+	`id` INT NOT NULL AUTO_INCREMENT,
+	`viaf` VARCHAR(22) UNIQUE,
+	`name` VARCHAR(150) CHARACTER SET utf8mb4 NOT NULL ,
+	PRIMARY KEY (`id`)
 );
 
 CREATE TABLE `genres` (
 	`id` INT NOT NULL AUTO_INCREMENT,
-	`name` VARCHAR(200) NOT NULL UNIQUE,
+	`name` VARCHAR(150) CHARACTER SET utf8mb4 NOT NULL UNIQUE,
 	PRIMARY KEY (`id`)
 );
 
 CREATE TABLE `books` (
-	`isbn` VARCHAR(13) NOT NULL,
-	`author` VARCHAR(22),
-	`name` VARCHAR(200) NOT NULL,
-	PRIMARY KEY (`isbn`)
+	`id` INT NOT NULL AUTO_INCREMENT,
+	`author_id` INT,
+	`title` VARCHAR(150) CHARACTER SET utf8mb4 NOT NULL,
+	`isbn` VARCHAR(13) UNIQUE,
+	PRIMARY KEY (`id`),
+  CONSTRAINT `books_fk0` FOREIGN KEY (`author_id`) REFERENCES `authors`(`id`) ON UPDATE CASCADE ON DELETE SET NULL
 );
 
 CREATE TABLE `book_genres` (
 	`id` INT NOT NULL AUTO_INCREMENT,
-	`genre` INT NOT NULL,
-	`book` VARCHAR(13) NOT NULL,
-	PRIMARY KEY (`id`)
+	`genre_fk` INT NOT NULL,
+	`book_fk` INT NOT NULL,
+	PRIMARY KEY (`id`),
+  CONSTRAINT `book_genres_fk0` FOREIGN KEY (`genre_fk`) REFERENCES `genres`(`id`) ON UPDATE CASCADE ON DELETE CASCADE,
+  CONSTRAINT `book_genres_fk1` FOREIGN KEY (`book_fk`) REFERENCES `books`(`id`) ON UPDATE CASCADE ON DELETE CASCADE
 );
 
-ALTER TABLE `books` ADD CONSTRAINT `books_fk0` FOREIGN KEY (`author`) REFERENCES `authors`(`viaf`);
-
-ALTER TABLE `book_genres` ADD CONSTRAINT `book_genres_fk0` FOREIGN KEY (`genre`) REFERENCES `genres`(`id`);
-
-ALTER TABLE `book_genres` ADD CONSTRAINT `book_genres_fk1` FOREIGN KEY (`book`) REFERENCES `books`(`isbn`);
 

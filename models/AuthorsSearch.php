@@ -18,6 +18,7 @@ class AuthorsSearch extends Authors
     public function rules()
     {
         return [
+            [['id'], 'integer'],
             [['viaf', 'name'], 'safe'],
         ];
     }
@@ -57,6 +58,10 @@ class AuthorsSearch extends Authors
         }
 
         // grid filtering conditions
+        $query->andFilterWhere([
+            'id' => $this->id,
+        ]);
+
         $query->andFilterWhere(['like', 'viaf', $this->viaf])
             ->andFilterWhere(['like', 'name', $this->name]);
 

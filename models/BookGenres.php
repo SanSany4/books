@@ -8,11 +8,11 @@ use Yii;
  * This is the model class for table "book_genres".
  *
  * @property integer $id
- * @property integer $genre
- * @property string $book
+ * @property integer $genre_fk
+ * @property integer $book_fk
  *
- * @property Genres $genre0
- * @property Books $book0
+ * @property Genres $genreFk
+ * @property Books $bookFk
  */
 class BookGenres extends \yii\db\ActiveRecord
 {
@@ -30,11 +30,10 @@ class BookGenres extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['genre', 'book'], 'required'],
-            [['genre'], 'integer'],
-            [['book'], 'number', 'max' => 9999999999999],
-            [['genre'], 'exist', 'skipOnError' => true, 'targetClass' => Genres::className(), 'targetAttribute' => ['genre' => 'id']],
-            [['book'], 'exist', 'skipOnError' => true, 'targetClass' => Books::className(), 'targetAttribute' => ['book' => 'isbn']],
+            [['genre_fk', 'book_fk'], 'required'],
+            [['genre_fk', 'book_fk'], 'integer'],
+            [['genre_fk'], 'exist', 'skipOnError' => true, 'targetClass' => Genres::className(), 'targetAttribute' => ['genre_fk' => 'id']],
+            [['book_fk'], 'exist', 'skipOnError' => true, 'targetClass' => Books::className(), 'targetAttribute' => ['book_fk' => 'id']],
         ];
     }
 
@@ -45,24 +44,24 @@ class BookGenres extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
-            'genre' => 'Genre',
-            'book' => 'Book',
+            'genre_fk' => 'Genre Fk',
+            'book_fk' => 'Book Fk',
         ];
     }
 
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getGenre0()
+    public function getGenreFk()
     {
-        return $this->hasOne(Genres::className(), ['id' => 'genre']);
+        return $this->hasOne(Genres::className(), ['id' => 'genre_fk']);
     }
 
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getBook0()
+    public function getBookFk()
     {
-        return $this->hasOne(Books::className(), ['isbn' => 'book']);
+        return $this->hasOne(Books::className(), ['id' => 'book_fk']);
     }
 }
