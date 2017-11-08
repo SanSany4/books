@@ -9,10 +9,9 @@ use yii\widgets\DetailView;
 $this->title = $model->name;
 $this->params['breadcrumbs'][] = ['label' => 'Books', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
+$author = $model->author0;
 ?>
 <div class="books-view">
-
-    <h1><?= Html::encode($this->title) ?></h1>
 
     <p>
         <?= Html::a('Update', ['update', 'id' => $model->isbn], ['class' => 'btn btn-primary']) ?>
@@ -24,14 +23,18 @@ $this->params['breadcrumbs'][] = $this->title;
             ],
         ]) ?>
     </p>
-
-    <?= DetailView::widget([
-        'model' => $model,
-        'attributes' => [
-            'isbn',
-            'author',
-            'name',
-        ],
-    ]) ?>
+    <h1><?= Html::encode($this->title) ?></h1>
+    <h2>By: <?= Html::a($author->name, ['authors/view', 'id' => $author->viaf])?></h2>
+    <?= Html::encode("ISBN: $model->isbn")?>
+    <p>
+        Genres:
+        <ul>
+            <?php foreach ($model->bookGenres as $genre): ?>
+                <li>
+                    <?= Html::a($genre->genre0->name, ['genres/view', 'id' => $genre->genre0->id]);?>
+                </li>
+            <?php endforeach; ?>
+        </ul>
+    </p>
 
 </div>

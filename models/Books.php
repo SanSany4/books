@@ -47,7 +47,6 @@ class Books extends \yii\db\ActiveRecord
             'isbn' => 'ISBN',
             'author' => 'Author',
             'name' => 'Name',
-            'genre' => 'Genre',
         ];
     }
 

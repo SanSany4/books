@@ -20,17 +20,17 @@ $this->title = 'Book catalogue';
             <div class="col-lg-4">
                 <h2>Authors</h2>
 
-                <p><a class="btn btn-default" href="index.php?r=authors"> browse authors &raquo;</a></p>
+                <p><a class="btn btn-default" href="authors">browse authors &raquo;</a></p>
             </div>
             <div class="col-lg-4">
                 <h2>Books</h2>
 
-                <p><a class="btn btn-default" href="index.php?r=books">browse books &raquo;</a></p>
+                <p><a class="btn btn-default" href="books">browse books &raquo;</a></p>
             </div>
             <div class="col-lg-4">
                 <h2>Genres</h2>
 
-                <p><a class="btn btn-default" href="index.php?r=genres">browse genres &raquo;</a></p>
+                <p><a class="btn btn-default" href="genres">browse genres &raquo;</a></p>
             </div>
         </div>
 
