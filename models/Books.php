@@ -31,8 +31,8 @@ class Books extends \yii\db\ActiveRecord
     {
         return [
             [['isbn', 'name'], 'required'],
-            [['isbn'], 'string', 'max' => 13],
-            [['author'], 'string', 'max' => 22],
+            [['isbn'], 'number', 'max' => 9999999999999],
+            [['author'], 'number'],
             [['name'], 'string', 'max' => 200],
             [['author'], 'exist', 'skipOnError' => true, 'targetClass' => Authors::className(), 'targetAttribute' => ['author' => 'viaf']],
         ];
@@ -44,9 +44,10 @@ class Books extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'isbn' => 'Isbn',
+            'isbn' => 'ISBN',
             'author' => 'Author',
             'name' => 'Name',
+            'genre' => 'Genre',
         ];
     }
 

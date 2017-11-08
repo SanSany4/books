@@ -29,7 +29,7 @@ class Authors extends \yii\db\ActiveRecord
     {
         return [
             [['viaf', 'name'], 'required'],
-            [['viaf'], 'string', 'max' => 22],
+            [['viaf'], 'number', 'max' => 22],
             [['name'], 'string', 'max' => 200],
         ];
     }
@@ -40,7 +40,7 @@ class Authors extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'viaf' => 'Viaf',
+            'viaf' => 'VIAF',
             'name' => 'Name',
         ];
     }
