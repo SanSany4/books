@@ -36,7 +36,7 @@ class Books extends \yii\db\ActiveRecord
             [['title'], 'string', 'max' => 150],
             [['isbn'], 'number', 'max' => 9999999999999],
             [['isbn'], 'unique'],
-            [['author_id'], 'exist', 'skipOnError' => true, 'targetClass' => Authors::className(), 'targetAttribute' => ['author' => 'id']],
+            [['author_id'], 'exist', 'skipOnError' => true, 'targetClass' => Authors::className(), 'targetAttribute' => ['author_id' => 'id']],
         ];
     }
 
