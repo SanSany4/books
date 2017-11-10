@@ -29,7 +29,7 @@ $this->params['breadcrumbs'][] = $this->title;
         <ul>
             <?php foreach ($model->bookGenres as $book): ?>
                 <li>
-                    <?= Html::a($book->bookFk->title, ['genres/view', 'id' => $book->bookFk->id]);?>
+                    <?= Html::a($book->bookFk->title, ['books/view', 'id' => $book->bookFk->id]);?>
                 </li>
             <?php endforeach; ?>
         </ul>

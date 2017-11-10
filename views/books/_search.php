@@ -2,6 +2,7 @@
 
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
+use yii\helpers\ArrayHelper;
 
 /* @var $this yii\web\View */
 /* @var $model app\models\BooksSearch */
@@ -15,7 +16,7 @@ use yii\widgets\ActiveForm;
         'method' => 'get',
     ]); ?>
 
-    <?= $form->field($model, 'author_id') ?>
+    <?=$form->field($model,'author_id')->dropdownlist(ArrayHelper::map(\app\models\Authors::find()->all(), 'id', 'name'))?>
 
     <?= $form->field($model, 'title') ?>
 
